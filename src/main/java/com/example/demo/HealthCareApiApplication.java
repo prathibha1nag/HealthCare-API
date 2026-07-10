@@ -1,0 +1,15 @@
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class HealthCareApiApplication {
+
+    public static void main(String[] args) {
+        SpringApplication application = new SpringApplication(HealthCareApiApplication.class);
+        application.addListeners(new SwaggerUiBrowserLauncher());
+        application.run(args);
+    }
+
+}
