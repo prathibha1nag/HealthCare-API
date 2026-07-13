@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.example.demo.dto.CreateAppointmentRequest;
@@ -38,10 +40,17 @@ public class AppointmentService {
             throw new ResourceNotFoundException("Doctor not found with id " + request.getDoctorId());
         }
 
+        LocalDateTime appointmentDate;
+        try {
+            appointmentDate = LocalDateTime.parse(request.getAppointmentDate());
+        } catch (DateTimeParseException ex) {
+            throw new IllegalArgumentException("Appointment date must be in ISO format yyyy-MM-dd'T'HH:mm:ss");
+        }
+
         Appointment appointment = new Appointment();
         appointment.setPatient(patientRepo.getReferenceById(request.getPatientId()));
         appointment.setDoctor(doctorRepo.getReferenceById(request.getDoctorId()));
-        appointment.setAppointmentDate(request.getAppointmentDate());
+        appointment.setAppointmentDate(appointmentDate);
         appointment.setReason(request.getReason());
         appointment.setStatus(request.getStatus());
 

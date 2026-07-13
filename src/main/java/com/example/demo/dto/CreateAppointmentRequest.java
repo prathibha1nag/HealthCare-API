@@ -1,8 +1,6 @@
 package com.example.demo.dto;
 
-import java.time.LocalDateTime;
 import com.example.demo.enums.Status;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -22,9 +20,8 @@ public class CreateAppointmentRequest {
     @NotNull(message = "Patient id is required")
     private Long patientId;
 
-    @NotNull(message = "Appointment date is required")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime appointmentDate;
+    @NotBlank(message = "Appointment date is required")
+    private String appointmentDate;
 
     @NotBlank(message = "Appointment reason is required")
     private String reason;
