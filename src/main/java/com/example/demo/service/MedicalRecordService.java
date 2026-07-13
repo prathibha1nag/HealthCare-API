@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
+import com.example.demo.dto.CreateMedicalRecordRequest;
 import com.example.demo.entity.MedicalRecord;
 import com.example.demo.entity.Patient;
 import com.example.demo.exceptionhandler.ResourceNotFoundException;
@@ -27,11 +28,15 @@ public class MedicalRecordService {
         return repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Medical record not found with id " + id));
     }
 
-    public MedicalRecord create(MedicalRecord medicalRecord) {
-        Patient patient = patientRepo.findById(medicalRecord.getPatient().getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Patient not found with id " + medicalRecord.getPatient().getId()));
-        medicalRecord.setId(null);
-        medicalRecord.setPatient(patient);
+    public MedicalRecord create(CreateMedicalRecordRequest request) {
+        Patient patient = patientRepo.findById(request.getPatientId())
+                .orElseThrow(() -> new ResourceNotFoundException("Patient not found with id " + request.getPatientId()));
+        MedicalRecord medicalRecord = MedicalRecord.builder()
+                .patient(patient)
+                .diagnosis(request.getDiagnosis())
+                .treatment(request.getTreatment())
+                .recordDate(request.getRecordDate())
+                .build();
         return repo.save(medicalRecord);
     }
 

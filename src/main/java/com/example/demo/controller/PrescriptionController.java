@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.example.demo.dto.CreatePrescriptionRequest;
 import com.example.demo.entity.Prescription;
 import com.example.demo.service.PrescriptionService;
 
@@ -26,28 +25,29 @@ public class PrescriptionController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Prescription>> listAll() {
-        return ResponseEntity.ok(service.listAll());
+    public List<Prescription> listAll() {
+        return service.listAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Prescription> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.getById(id));
+    public Prescription getById(@PathVariable Long id) {
+        return service.getById(id);
     }
 
     @PostMapping
-    public ResponseEntity<Prescription> create(@Validated @RequestBody Prescription prescription) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(prescription));
+    public Prescription create(@Valid @RequestBody CreatePrescriptionRequest request) {
+        Prescription savedPrescription = service.create(request);
+        return savedPrescription;
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Prescription> update(@PathVariable Long id, @Validated @RequestBody Prescription prescription) {
-        return ResponseEntity.ok(service.update(id, prescription));
+    public Prescription update(@PathVariable Long id, @Valid @RequestBody Prescription prescription) {
+        Prescription updatedPrescription = service.update(id, prescription);
+        return updatedPrescription;
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         service.delete(id);
-        return ResponseEntity.noContent().build();
     }
 }

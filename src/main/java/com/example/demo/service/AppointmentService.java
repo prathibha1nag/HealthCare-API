@@ -2,9 +2,8 @@ package com.example.demo.service;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
+import com.example.demo.dto.CreateAppointmentRequest;
 import com.example.demo.entity.Appointment;
-import com.example.demo.entity.Doctor;
-import com.example.demo.entity.Patient;
 import com.example.demo.exceptionhandler.ResourceNotFoundException;
 import com.example.demo.repository.AppointmentRepository;
 import com.example.demo.repository.DoctorRepository;
@@ -31,14 +30,21 @@ public class AppointmentService {
         return repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Appointment not found with id " + id));
     }
 
-    public Appointment create(Appointment appointment) {
-        Patient patient = patientRepo.findById(appointment.getPatient().getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Patient not found with id " + appointment.getPatient().getId()));
-        Doctor doctor = doctorRepo.findById(appointment.getDoctor().getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id " + appointment.getDoctor().getId()));
-        appointment.setId(null);
-        appointment.setPatient(patient);
-        appointment.setDoctor(doctor);
+    public Appointment create(CreateAppointmentRequest request) {
+        if (!patientRepo.existsById(request.getPatientId())) {
+            throw new ResourceNotFoundException("Patient not found with id " + request.getPatientId());
+        }
+        if (!doctorRepo.existsById(request.getDoctorId())) {
+            throw new ResourceNotFoundException("Doctor not found with id " + request.getDoctorId());
+        }
+
+        Appointment appointment = new Appointment();
+        appointment.setPatient(patientRepo.getReferenceById(request.getPatientId()));
+        appointment.setDoctor(doctorRepo.getReferenceById(request.getDoctorId()));
+        appointment.setAppointmentDate(request.getAppointmentDate());
+        appointment.setReason(request.getReason());
+        appointment.setStatus(request.getStatus());
+
         return repo.save(appointment);
     }
 

@@ -1,1 +1,477 @@
-{"openapi":"3.1.0","info":{"title":"OpenAPI definition","version":"v0"},"servers":[{"url":"http://localhost:8080","description":"Generated server url"}],"paths":{"/api/records/{id}":{"get":{"tags":["medical-record-controller"],"operationId":"getById","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","format":"int64"}}],"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/MedicalRecord"}}}}}},"put":{"tags":["medical-record-controller"],"operationId":"update","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","format":"int64"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/MedicalRecord"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/MedicalRecord"}}}}}},"delete":{"tags":["medical-record-controller"],"operationId":"delete","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","format":"int64"}}],"responses":{"200":{"description":"OK"}}}},"/api/prescriptions/{id}":{"get":{"tags":["prescription-controller"],"operationId":"getById_1","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","format":"int64"}}],"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/Prescription"}}}}}},"put":{"tags":["prescription-controller"],"operationId":"update_1","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","format":"int64"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Prescription"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/Prescription"}}}}}},"delete":{"tags":["prescription-controller"],"operationId":"delete_1","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","format":"int64"}}],"responses":{"200":{"description":"OK"}}}},"/api/patients/{id}":{"get":{"tags":["patient-controller"],"operationId":"getById_2","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","format":"int64"}}],"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/Patient"}}}}}},"put":{"tags":["patient-controller"],"operationId":"update_2","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","format":"int64"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Patient"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/Patient"}}}}}},"delete":{"tags":["patient-controller"],"operationId":"delete_2","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","format":"int64"}}],"responses":{"200":{"description":"OK"}}}},"/api/doctors/{id}":{"get":{"tags":["doctor-controller"],"operationId":"getById_3","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","format":"int64"}}],"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/Doctor"}}}}}},"put":{"tags":["doctor-controller"],"operationId":"update_3","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","format":"int64"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Doctor"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/Doctor"}}}}}},"delete":{"tags":["doctor-controller"],"operationId":"delete_3","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","format":"int64"}}],"responses":{"200":{"description":"OK"}}}},"/api/billing/{id}":{"get":{"tags":["billing-controller"],"operationId":"getById_4","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","format":"int64"}}],"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/Billing"}}}}}},"put":{"tags":["billing-controller"],"operationId":"update_4","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","format":"int64"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Billing"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/Billing"}}}}}},"delete":{"tags":["billing-controller"],"operationId":"delete_4","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","format":"int64"}}],"responses":{"200":{"description":"OK"}}}},"/api/appointments/{id}":{"get":{"tags":["appointment-controller"],"operationId":"getById_5","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","format":"int64"}}],"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/Appointment"}}}}}},"put":{"tags":["appointment-controller"],"operationId":"update_5","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","format":"int64"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Appointment"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/Appointment"}}}}}},"delete":{"tags":["appointment-controller"],"operationId":"delete_5","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","format":"int64"}}],"responses":{"200":{"description":"OK"}}}},"/api/records":{"get":{"tags":["medical-record-controller"],"operationId":"listAll","responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/MedicalRecord"}}}}}}},"post":{"tags":["medical-record-controller"],"operationId":"create","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/MedicalRecord"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/MedicalRecord"}}}}}}},"/api/prescriptions":{"get":{"tags":["prescription-controller"],"operationId":"listAll_1","responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Prescription"}}}}}}},"post":{"tags":["prescription-controller"],"operationId":"create_1","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Prescription"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/Prescription"}}}}}}},"/api/patients":{"get":{"tags":["patient-controller"],"operationId":"listAll_2","responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Patient"}}}}}}},"post":{"tags":["patient-controller"],"operationId":"create_2","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Patient"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/Patient"}}}}}}},"/api/doctors":{"get":{"tags":["doctor-controller"],"operationId":"listAll_3","responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Doctor"}}}}}}},"post":{"tags":["doctor-controller"],"operationId":"create_3","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Doctor"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/Doctor"}}}}}}},"/api/billing":{"get":{"tags":["billing-controller"],"operationId":"listAll_4","responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Billing"}}}}}}},"post":{"tags":["billing-controller"],"operationId":"create_4","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Billing"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/Billing"}}}}}}},"/api/appointments":{"get":{"tags":["appointment-controller"],"operationId":"listAll_5","responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"type":"array","items":{"$ref":"#/components/schemas/Appointment"}}}}}}},"post":{"tags":["appointment-controller"],"operationId":"create_5","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Appointment"}}},"required":true},"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"$ref":"#/components/schemas/Appointment"}}}}}}},"/":{"get":{"tags":["home-controller"],"operationId":"health","responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"type":"string"}}}}}}}},"components":{"schemas":{"MedicalRecord":{"type":"object","properties":{"id":{"type":"integer","format":"int64"},"patient":{"$ref":"#/components/schemas/Patient"},"diagnosis":{"type":"string"},"treatment":{"type":"string"},"recordDate":{"type":"string","format":"date-time"}}},"Patient":{"type":"object","properties":{"id":{"type":"integer","format":"int64"},"name":{"type":"string"},"dob":{"type":"string","format":"date"},"gender":{"type":"string"},"contact":{"type":"string"},"address":{"type":"string"},"createdAt":{"type":"string","format":"date-time"}}},"Appointment":{"type":"object","properties":{"id":{"type":"integer","format":"int64"},"patient":{"$ref":"#/components/schemas/Patient"},"doctor":{"$ref":"#/components/schemas/Doctor"},"appointmentDate":{"type":"string","format":"date-time"},"reason":{"type":"string"},"status":{"type":"string","enum":["ACTIVE","INACTIVE","CANCELLED"]}}},"Doctor":{"type":"object","properties":{"id":{"type":"integer","format":"int64"},"name":{"type":"string"},"specialization":{"type":"string"},"phone":{"type":"string"},"email":{"type":"string"}}},"Prescription":{"type":"object","properties":{"id":{"type":"integer","format":"int64"},"appointment":{"$ref":"#/components/schemas/Appointment"},"medication":{"type":"string"},"dosage":{"type":"string"},"instructions":{"type":"string"}}},"Billing":{"type":"object","properties":{"id":{"type":"integer","format":"int64"},"appointment":{"$ref":"#/components/schemas/Appointment"},"amount":{"type":"number"},"status":{"type":"string"},"billingDate":{"type":"string","format":"date-time"}}}}}}
+﻿{
+  "info": {
+    "name": "HealthCare API",
+    "description": "Simple Postman collection organized by controller with all API methods.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "Appointment Controller",
+      "item": [
+        {
+          "name": "Get All Appointments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "appointments"]
+            }
+          }
+        },
+        {
+          "name": "Get Appointment by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "appointments", "{{id}}"]
+            }
+          }
+        },
+        {
+          "name": "Create Appointment",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"doctorId\": 1,\n  \"patientId\": 1,\n  \"appointmentDate\": \"2026-07-20T10:00:00\",\n  \"reason\": \"Regular checkup\",\n  \"status\": \"SCHEDULED\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "appointments"]
+            }
+          }
+        },
+        {
+          "name": "Update Appointment",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointmentDate\": \"2026-07-20T11:00:00\",\n  \"reason\": \"Updated appointment reason\",\n  \"status\": \"CONFIRMED\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "appointments", "{{id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Appointment",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "appointments", "{{id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Billing Controller",
+      "item": [
+        {
+          "name": "Get All Billing",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/billing",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "billing"]
+            }
+          }
+        },
+        {
+          "name": "Get Billing by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/billing/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "billing", "{{id}}"]
+            }
+          }
+        },
+        {
+          "name": "Create Billing",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointmentId\": 1,\n  \"amount\": 1200.0,\n  \"status\": \"PAID\",\n  \"billingDate\": \"2026-07-20T12:00:00\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/billing",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "billing"]
+            }
+          }
+        },
+        {
+          "name": "Update Billing",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 1300.0,\n  \"status\": \"PENDING\",\n  \"billingDate\": \"2026-07-21T09:00:00\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/billing/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "billing", "{{id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Billing",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/billing/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "billing", "{{id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Doctor Controller",
+      "item": [
+        {
+          "name": "Get All Doctors",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/doctors",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "doctors"]
+            }
+          }
+        },
+        {
+          "name": "Get Doctor by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/doctors/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "doctors", "{{id}}"]
+            }
+          }
+        },
+        {
+          "name": "Create Doctor",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dr. Priya\",\n  \"specialization\": \"General Physician\",\n  \"phone\": \"9876501234\",\n  \"email\": \"priya@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/doctors",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "doctors"]
+            }
+          }
+        },
+        {
+          "name": "Update Doctor",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dr. Priya R\",\n  \"specialization\": \"Internal Medicine\",\n  \"phone\": \"9876504321\",\n  \"email\": \"priya.r@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/doctors/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "doctors", "{{id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Doctor",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/doctors/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "doctors", "{{id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Patient Controller",
+      "item": [
+        {
+          "name": "Get All Patients",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/patients",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "patients"]
+            }
+          }
+        },
+        {
+          "name": "Get Patient by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/patients/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "patients", "{{id}}"]
+            }
+          }
+        },
+        {
+          "name": "Create Patient",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ravi\",\n  \"dob\": \"1998-06-12\",\n  \"gender\": \"Male\",\n  \"contact\": \"9988776655\",\n  \"address\": \"12 Park Street\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/patients",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "patients"]
+            }
+          }
+        },
+        {
+          "name": "Update Patient",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ravi Kumar\",\n  \"dob\": \"1998-06-12\",\n  \"gender\": \"Male\",\n  \"contact\": \"9988776655\",\n  \"address\": \"45 Hill Road\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/patients/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "patients", "{{id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Patient",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/patients/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "patients", "{{id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Medical Record Controller",
+      "item": [
+        {
+          "name": "Get All Medical Records",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/records",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "records"]
+            }
+          }
+        },
+        {
+          "name": "Get Medical Record by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/records/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "records", "{{id}}"]
+            }
+          }
+        },
+        {
+          "name": "Create Medical Record",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"patientId\": 1,\n  \"diagnosis\": \"Fever\",\n  \"treatment\": \"Rest and fluids\",\n  \"recordDate\": \"2026-07-20T09:00:00\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/records",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "records"]
+            }
+          }
+        },
+        {
+          "name": "Update Medical Record",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"diagnosis\": \"Updated diagnosis\",\n  \"treatment\": \"Updated treatment\",\n  \"recordDate\": \"2026-07-20T10:00:00\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/records/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "records", "{{id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Medical Record",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/records/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "records", "{{id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Prescription Controller",
+      "item": [
+        {
+          "name": "Get All Prescriptions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/prescriptions",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "prescriptions"]
+            }
+          }
+        },
+        {
+          "name": "Get Prescription by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/prescriptions/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "prescriptions", "{{id}}"]
+            }
+          }
+        },
+        {
+          "name": "Create Prescription",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appointmentId\": 1,\n  \"medication\": \"Paracetamol\",\n  \"dosage\": \"500mg\",\n  \"instructions\": \"After food twice a day\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/prescriptions",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "prescriptions"]
+            }
+          }
+        },
+        {
+          "name": "Update Prescription",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"medication\": \"Ibuprofen\",\n  \"dosage\": \"200mg\",\n  \"instructions\": \"Once a day\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/prescriptions/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "prescriptions", "{{id}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Prescription",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/prescriptions/{{id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "prescriptions", "{{id}}"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
