@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
+import com.example.demo.dto.CreateBillingRequest;
 import com.example.demo.entity.Appointment;
 import com.example.demo.entity.Billing;
 import com.example.demo.exceptionhandler.ResourceNotFoundException;
@@ -27,11 +28,17 @@ public class BillingService {
         return repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Billing not found with id " + id));
     }
 
-    public Billing create(Billing billing) {
-        Appointment appointment = appointmentRepo.findById(billing.getAppointment().getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Appointment not found with id " + billing.getAppointment().getId()));
-        billing.setId(null);
-        billing.setAppointment(appointment);
+    public Billing create(CreateBillingRequest request) {
+        Appointment appointment = appointmentRepo.findById(request.getAppointmentId())
+                .orElseThrow(() -> new ResourceNotFoundException("Appointment not found with id " + request.getAppointmentId()));
+
+        Billing billing = Billing.builder()
+                .appointment(appointment)
+                .amount(request.getAmount())
+                .status(request.getStatus())
+                .billingDate(request.getBillingDate())
+                .build();
+
         return repo.save(billing);
     }
 

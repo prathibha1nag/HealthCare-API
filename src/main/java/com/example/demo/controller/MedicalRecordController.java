@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.example.demo.dto.CreateMedicalRecordRequest;
 import com.example.demo.entity.MedicalRecord;
 import com.example.demo.service.MedicalRecordService;
 
@@ -26,28 +25,29 @@ public class MedicalRecordController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MedicalRecord>> listAll() {
-        return ResponseEntity.ok(service.listAll());
+    public List<MedicalRecord> listAll() {
+        return service.listAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MedicalRecord> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.getById(id));
+    public MedicalRecord getById(@PathVariable Long id) {
+        return service.getById(id);
     }
 
     @PostMapping
-    public ResponseEntity<MedicalRecord> create(@Validated @RequestBody MedicalRecord medicalRecord) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(medicalRecord));
+    public MedicalRecord create(@Valid @RequestBody CreateMedicalRecordRequest request) {
+        MedicalRecord savedRecord = service.create(request);
+        return savedRecord;
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MedicalRecord> update(@PathVariable Long id, @Validated @RequestBody MedicalRecord medicalRecord) {
-        return ResponseEntity.ok(service.update(id, medicalRecord));
+    public MedicalRecord update(@PathVariable Long id, @Valid @RequestBody MedicalRecord medicalRecord) {
+        MedicalRecord updatedRecord = service.update(id, medicalRecord);
+        return updatedRecord;
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         service.delete(id);
-        return ResponseEntity.noContent().build();
     }
 }

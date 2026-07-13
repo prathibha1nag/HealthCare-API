@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
+import com.example.demo.dto.CreatePrescriptionRequest;
 import com.example.demo.entity.Appointment;
 import com.example.demo.entity.Prescription;
 import com.example.demo.exceptionhandler.ResourceNotFoundException;
@@ -27,11 +28,15 @@ public class PrescriptionService {
         return repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Prescription not found with id " + id));
     }
 
-    public Prescription create(Prescription prescription) {
-        Appointment appointment = appointmentRepo.findById(prescription.getAppointment().getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Appointment not found with id " + prescription.getAppointment().getId()));
-        prescription.setId(null);
-        prescription.setAppointment(appointment);
+    public Prescription create(CreatePrescriptionRequest request) {
+        Appointment appointment = appointmentRepo.findById(request.getAppointmentId())
+                .orElseThrow(() -> new ResourceNotFoundException("Appointment not found with id " + request.getAppointmentId()));
+        Prescription prescription = Prescription.builder()
+                .appointment(appointment)
+                .medication(request.getMedication())
+                .dosage(request.getDosage())
+                .instructions(request.getInstructions())
+                .build();
         return repo.save(prescription);
     }
 

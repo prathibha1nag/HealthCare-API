@@ -161,6 +161,17 @@ Here are a few simple notes that may help when testing the API:
 
 - Swagger UI is a good place to try the endpoints quickly without writing too much request setup.
 
+## API response example
+
+The screenshot below shows the `GET /api/records/1` call when the record does not exist. This is a useful test for the API response flow because it shows how the app responds to a missing medical record.
+
+- URL: `http://localhost:8080/api/records/1`
+- Use case: get medical record details by id
+- Response: `404 Not Found`
+- Response body: `Medical record not found with id 1`
+
+![API response example](docs/api-response-example.svg)
+
 ## Example of how I tested the app
 
 I tested the APIs using:

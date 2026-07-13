@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
+import com.example.demo.dto.CreateDoctorRequest;
 import com.example.demo.entity.Doctor;
 import com.example.demo.exceptionhandler.ResourceNotFoundException;
 import com.example.demo.repository.DoctorRepository;
@@ -23,8 +24,13 @@ public class DoctorService {
         return repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id " + id));
     }
 
-    public Doctor create(Doctor doctor) {
-        doctor.setId(null);
+    public Doctor create(CreateDoctorRequest request) {
+        Doctor doctor = Doctor.builder()
+                .name(request.getName())
+                .specialization(request.getSpecialization())
+                .phone(request.getPhone())
+                .email(request.getEmail())
+                .build();
         return repo.save(doctor);
     }
 

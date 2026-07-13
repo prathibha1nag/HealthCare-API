@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.example.demo.dto.CreateAppointmentRequest;
 import com.example.demo.entity.Appointment;
 import com.example.demo.service.AppointmentService;
 
@@ -26,28 +25,29 @@ public class AppointmentController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Appointment>> listAll() {
-        return ResponseEntity.ok(service.listAll());
+    public List<Appointment> listAll() {
+        return service.listAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Appointment> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.getById(id));
+    public Appointment getById(@PathVariable Long id) {
+        return service.getById(id);
     }
 
     @PostMapping
-    public ResponseEntity<Appointment> create(@Validated @RequestBody Appointment appointment) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(appointment));
+    public Appointment create(@Valid @RequestBody CreateAppointmentRequest request) {
+        Appointment savedAppointment = service.create(request);
+        return savedAppointment;
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Appointment> update(@PathVariable Long id, @Validated @RequestBody Appointment appointment) {
-        return ResponseEntity.ok(service.update(id, appointment));
+    public Appointment update(@PathVariable Long id, @Valid @RequestBody Appointment appointment) {
+        Appointment updatedAppointment = service.update(id, appointment);
+        return updatedAppointment;
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         service.delete(id);
-        return ResponseEntity.noContent().build();
     }
 }
