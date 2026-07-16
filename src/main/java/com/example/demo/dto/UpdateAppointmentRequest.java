@@ -13,13 +13,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CreateAppointmentRequest {
+public class UpdateAppointmentRequest {
+    @NotNull(message = "AppointId is required")
+    private Long appointmentId;
 
     @NotNull(message = "Doctor id is required")
     private Long doctorId;
 
-    @NotNull(message = "Patient id is required")
-    private Long patientId;
 
     @NotBlank(message = "Appointment date is required")
     private String appointmentDate;

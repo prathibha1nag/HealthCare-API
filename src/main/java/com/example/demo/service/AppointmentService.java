@@ -3,9 +3,15 @@ package com.example.demo.service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+
 import org.springframework.stereotype.Service;
+
 import com.example.demo.dto.CreateAppointmentRequest;
+import com.example.demo.dto.UpdateAppointmentRequest;
 import com.example.demo.entity.Appointment;
+import com.example.demo.entity.Doctor;
+import com.example.demo.entity.Patient;
+import com.example.demo.exceptionhandler.BadRequestException;
 import com.example.demo.exceptionhandler.ResourceNotFoundException;
 import com.example.demo.repository.AppointmentRepository;
 import com.example.demo.repository.DoctorRepository;
@@ -33,23 +39,15 @@ public class AppointmentService {
     }
 
     public Appointment create(CreateAppointmentRequest request) {
-        if (!patientRepo.existsById(request.getPatientId())) {
-            throw new ResourceNotFoundException("Patient not found with id " + request.getPatientId());
-        }
-        if (!doctorRepo.existsById(request.getDoctorId())) {
-            throw new ResourceNotFoundException("Doctor not found with id " + request.getDoctorId());
-        }
+        Patient patient = patientRepo.findById(request.getPatientId())
+                .orElseThrow(() -> new ResourceNotFoundException("Patient not found with id " + request.getPatientId()));
+        Doctor doctor = doctorRepo.findById(request.getDoctorId())
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id " + request.getDoctorId()));
 
-        LocalDateTime appointmentDate;
-        try {
-            appointmentDate = LocalDateTime.parse(request.getAppointmentDate());
-        } catch (DateTimeParseException ex) {
-            throw new IllegalArgumentException("Appointment date must be in ISO format yyyy-MM-dd'T'HH:mm:ss");
-        }
-
+        LocalDateTime appointmentDate = parseAppointmentDate(request.getAppointmentDate());
         Appointment appointment = new Appointment();
-        appointment.setPatient(patientRepo.getReferenceById(request.getPatientId()));
-        appointment.setDoctor(doctorRepo.getReferenceById(request.getDoctorId()));
+        appointment.setPatient(patient);
+        appointment.setDoctor(doctor);
         appointment.setAppointmentDate(appointmentDate);
         appointment.setReason(request.getReason());
         appointment.setStatus(request.getStatus());
@@ -57,18 +55,36 @@ public class AppointmentService {
         return repo.save(appointment);
     }
 
-    public Appointment update(Long id, Appointment updates) {
+    public Appointment update(Long id, UpdateAppointmentRequest request) {
         Appointment existing = getById(id);
-        if (updates.getAppointmentDate() != null) {
-            existing.setAppointmentDate(updates.getAppointmentDate());
-        }
-        existing.setReason(updates.getReason());
-        existing.setStatus(updates.getStatus());
+        
+        Doctor doctor = doctorRepo.findById(request.getDoctorId())
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id " + request.getDoctorId()));
+
+        LocalDateTime appointmentDate = parseAppointmentDate(request.getAppointmentDate());
+        // existing.setPatient(patient); patient shudnt be changed
+        existing.setDoctor(doctor);
+        existing.setAppointmentDate(appointmentDate);
+        existing.setReason(request.getReason());
+        existing.setStatus(request.getStatus());
         return repo.save(existing);
     }
 
     public void delete(Long id) {
         Appointment existing = getById(id);
         repo.delete(existing);
+    }
+
+    public LocalDateTime parseAppointmentDate(String dateStr) {
+        LocalDateTime appointmentDate;
+        try {
+            appointmentDate = LocalDateTime.parse(dateStr);
+        } catch (DateTimeParseException ex) {
+            throw new BadRequestException("Appointment date must be in ISO format yyyy-MM-dd'T'HH:mm:ss");
+        }
+        if (appointmentDate.isBefore(LocalDateTime.now())) {
+            throw new BadRequestException("Appointment date must be in the future");
+        }
+        return appointmentDate;
     }
 }
