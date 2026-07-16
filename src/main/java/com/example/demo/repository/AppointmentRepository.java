@@ -20,4 +20,11 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 	@Query("SELECT a FROM Appointment a WHERE a.appointmentDate > :fromDate")
 	List<Appointment> findFutureAppointments(@Param("fromDate") LocalDateTime fromDate);
 
+	@Query("SELECT a FROM Appointment a WHERE a.doctor.id = :doctorId "
+			+ "AND a.appointmentDate >= :startOfDay AND a.appointmentDate < :startOfNextDay")
+	List<Appointment> findByDoctorIdAndAppointmentDate(
+			@Param("doctorId") Long doctorId,
+			@Param("startOfDay") LocalDateTime startOfDay,
+			@Param("startOfNextDay") LocalDateTime startOfNextDay);
+
 }

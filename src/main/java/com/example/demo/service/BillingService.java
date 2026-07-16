@@ -6,6 +6,8 @@ import com.example.demo.dto.CreateBillingRequest;
 import com.example.demo.entity.Appointment;
 import com.example.demo.entity.Billing;
 import com.example.demo.exceptionhandler.ResourceNotFoundException;
+import com.example.demo.exceptionhandler.BadRequestException;
+import java.time.LocalDateTime;
 import com.example.demo.repository.AppointmentRepository;
 import com.example.demo.repository.BillingRepository;
 
@@ -31,6 +33,9 @@ public class BillingService {
     public Billing create(CreateBillingRequest request) {
         Appointment appointment = appointmentRepo.findById(request.getAppointmentId())
                 .orElseThrow(() -> new ResourceNotFoundException("Appointment not found with id " + request.getAppointmentId()));
+        if (request.getBillingDate().isAfter(LocalDateTime.now())) {
+            throw new BadRequestException("Billing date cannot be in the future");
+        }
 
         Billing billing = Billing.builder()
                 .appointment(appointment)
@@ -44,6 +49,9 @@ public class BillingService {
 
     public Billing update(Long id, Billing updates) {
         Billing existing = getById(id);
+        if (updates.getBillingDate() != null && updates.getBillingDate().isAfter(LocalDateTime.now())) {
+            throw new BadRequestException("Billing date cannot be in the future");
+        }
         existing.setAmount(updates.getAmount());
         existing.setStatus(updates.getStatus());
         existing.setBillingDate(updates.getBillingDate());

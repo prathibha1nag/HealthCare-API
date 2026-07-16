@@ -6,6 +6,8 @@ import com.example.demo.dto.CreateMedicalRecordRequest;
 import com.example.demo.entity.MedicalRecord;
 import com.example.demo.entity.Patient;
 import com.example.demo.exceptionhandler.ResourceNotFoundException;
+import com.example.demo.exceptionhandler.BadRequestException;
+import java.time.LocalDateTime;
 import com.example.demo.repository.MedicalRecordRepository;
 import com.example.demo.repository.PatientRepository;
 
@@ -31,6 +33,9 @@ public class MedicalRecordService {
     public MedicalRecord create(CreateMedicalRecordRequest request) {
         Patient patient = patientRepo.findById(request.getPatientId())
                 .orElseThrow(() -> new ResourceNotFoundException("Patient not found with id " + request.getPatientId()));
+        if (request.getRecordDate().isAfter(LocalDateTime.now())) {
+            throw new BadRequestException("Medical record date cannot be in the future");
+        }
         MedicalRecord medicalRecord = MedicalRecord.builder()
                 .patient(patient)
                 .diagnosis(request.getDiagnosis())
@@ -42,6 +47,9 @@ public class MedicalRecordService {
 
     public MedicalRecord update(Long id, MedicalRecord updates) {
         MedicalRecord existing = getById(id);
+        if (updates.getRecordDate() != null && updates.getRecordDate().isAfter(LocalDateTime.now())) {
+            throw new BadRequestException("Medical record date cannot be in the future");
+        }
         existing.setDiagnosis(updates.getDiagnosis());
         existing.setTreatment(updates.getTreatment());
         existing.setRecordDate(updates.getRecordDate());
