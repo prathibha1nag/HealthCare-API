@@ -2,6 +2,9 @@ package com.example.demo.enums;
 
 public enum Status {
     ACTIVE,
-    INACTIVE,
-    CANCELLED
+    DONE,
+    CANCELLED,
+    RESCHEDULED,
+    PATIENTNOSHOW,
+    DOCTNOSHOW
 }

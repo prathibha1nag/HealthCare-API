@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
-import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,9 +10,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.example.demo.dto.CreateAppointmentRequest;
+import com.example.demo.dto.UpdateAppointmentRequest;
 import com.example.demo.entity.Appointment;
 import com.example.demo.service.AppointmentService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/appointments")
@@ -41,8 +45,8 @@ public class AppointmentController {
     }
 
     @PutMapping("/{id}")
-    public Appointment update(@PathVariable Long id, @Valid @RequestBody Appointment appointment) {
-        Appointment updatedAppointment = service.update(id, appointment);
+    public Appointment update(@PathVariable Long id, @Valid @RequestBody UpdateAppointmentRequest request) {
+        Appointment updatedAppointment = service.update(id, request);
         return updatedAppointment;
     }
 

@@ -87,7 +87,8 @@ public class GlobalExceptionHandler {
         // String message = exception instanceof HttpMessageNotReadableException
         //         ? "Request body is invalid or contains an unsupported value"
         //         : exception.getMessage();
-        String message = "Request body is invalid or contains an unsupported value";
+        String message = "Request body is invalid or contains an unsupported value"+
+                (exception instanceof BadRequestException ? ": " + exception.getMessage() : "");
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), message,
                 LocalDateTime.now(), request.getRequestURI());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
